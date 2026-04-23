@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="theme-color" content="#0f172a"/>
+<title>I'm Coming to PENIEL 2026 · DOCEM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root {
+    --red:        #dc2626;
+    --red-deep:   #991b1b;
+    --red-glow:   #ef4444;
+    --amber:      #fbbf24;
+    --slate-900:  #0f172a;
+    --slate-800:  #1e293b;
+    --slate-700:  #334155;
+    --slate-400:  #94a3b8;
+    --slate-200:  #e2e8f0;
+    --white:      #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { min-height: 100%; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, system-ui, sans-serif;
+    background: var(--slate-900);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-bottom: 40px;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(220, 38, 38, 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(251, 191, 36, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header.top {
+    position: relative;
+    z-index: 2;
+    padding: 22px 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--slate-400);
+  }
+  .brand .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 12px var(--red-glow);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+  }
+
+  .intro {
+    text-align: center;
+    padding: 20px 20px 28px;
+    position: relative;
+    z-index: 2;
+    animation: fadeUp 0.7s ease both;
+  }
+  .intro .kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--red-glow);
+    margin-bottom: 14px;
+  }
+  .intro h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(40px, 10vw, 64px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .intro h1 .em {
+    font-style: italic;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ef4444, #fbbf24);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .intro p {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--slate-400);
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  @media (min-width: 900px) {
+    .main {
+      grid-template-columns: 440px 1fr;
+      gap: 36px;
+      padding: 0 28px;
+      align-items: start;
+    }
+  }
+
+  .poster-wrap {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  @media (min-width: 900px) {
+    .poster-wrap { order: 2; position: sticky; top: 20px; }
+  }
+
+  .poster-frame {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 4 / 5;
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+      0 30px 60px -20px rgba(0,0,0,0.7),
+      0 0 0 1px rgba(255,255,255,0.06),
+      0 0 60px -20px rgba(220, 38, 38, 0.35);
+    transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+  }
+  @media (min-width: 900px) {
+    .poster-frame:hover { transform: translateY(-4px) scale(1.01); }
+  }
+
+  .poster {
+    position: absolute;
+    inset: 0;
+    background: var(--slate-900);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .photo-area {
+    position: relative;
+    flex: 1;
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+    overflow: hidden;
+  }
+  .photo-area img.user-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+
+  .photo-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--slate-400);
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .photo-placeholder svg {
+    width: 64px; height: 64px;
+    opacity: 0.3;
+  }
+  .photo-placeholder .t {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .photo-placeholder .s {
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  .photo-area::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg,
+        rgba(15, 23, 42, 0.45) 0%,
+        rgba(15, 23, 42, 0) 25%,
+        rgba(15, 23, 42, 0) 45%,
+        rgba(15, 23, 42, 0.85) 88%,
+        rgba(15, 23, 42, 0.98) 100%);
+    pointer-events: none;
+  }
+
+  .accent-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--red-deep), var(--red), var(--amber), var(--red), var(--red-deep));
+    z-index: 3;
+  }
+
+  .p-brand {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .p-brand .logo-box {
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    position: relative;
+  }
+  .p-brand .logo-box img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    padding: 3px;
+  }
+  .p-brand .logo-box .fallback {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: var(--red-glow);
+    font-style: italic;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .p-brand .label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.9);
+    text-transform: uppercase;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  }
+
+  .p-date {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    z-index: 4;
+    background: rgba(220, 38, 38, 0.95);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+  }
+
+  .p-bottom {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    z-index: 4;
+    padding: 20px 24px 22px;
+  }
+  .p-iam {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 6px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+  }
+  .p-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(24px, 6vw, 30px);
+    line-height: 1.1;
+    margin-bottom: 14px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    word-break: break-word;
+  }
+  .p-program {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(44px, 11vw, 56px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #dc2626 0%, #fbbf24 60%, #dc2626 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 14px;
+    filter: drop-shadow(0 2px 8px rgba(220, 38, 38, 0.3));
+  }
+  .p-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    margin-bottom: 12px;
+  }
+  .p-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+  }
+  .p-detail-block { flex: 1; }
+  .p-detail-block .lbl {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .p-detail-block .val {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.95);
+    line-height: 1.3;
+  }
+  .p-detail-block.right { text-align: right; }
+  .p-hashtag {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: rgba(251, 191, 36, 0.85);
+    text-transform: uppercase;
+  }
+
+  .poster-hint {
+    font-size: 12px;
+    color: var(--slate-400);
+    text-align: center;
+    max-width: 300px;
+    line-height: 1.5;
+  }
+
+  .controls {
+    order: 2;
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 18px;
+    padding: 22px 20px;
+    backdrop-filter: blur(20px);
+  }
+  @media (min-width: 900px) {
+    .controls { order: 1; padding: 28px 24px; }
+  }
+  .controls-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .controls-sub {
+    font-size: 13px;
+    color: var(--slate-400);
+    margin-bottom: 20px;
+  }
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--slate-400);
+    margin-bottom: 8px;
+  }
+  .field input[type="text"] {
+    width: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: var(--white);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .field input[type="text"]:focus {
+    outline: none;
+    border-color: var(--red);
+    background: rgba(15, 23, 42, 0.9);
+  }
+  .field input[type="text"]::placeholder { color: var(--slate-400); opacity: 0.7; }
+
+  .upload-zone {
+    position: relative;
+    border: 2px dashed rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 22px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: rgba(15, 23, 42, 0.4);
+  }
+  .upload-zone:active { transform: scale(0.98); }
+  .upload-zone:hover {
+    border-color: var(--red-glow);
+    background: rgba(220, 38, 38, 0.05);
+  }
+  .upload-zone input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer;
+  }
+  .upload-zone .up-icon {
+    width: 44px; height: 44px;
+    margin: 0 auto 10px;
+    background: linear-gradient(135deg, var(--red), var(--red-deep));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(220, 38, 38, 0.35);
+  }
+  .upload-zone .up-icon svg { width: 22px; height: 22px; color: #fff; }
+  .upload-zone .up-main {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 3px;
+  }
+  .upload-zone .up-sub {
+    font-size: 11px;
+    color: var(--slate-400);
+  }
+  .upload-zone.has-file {
+    border-style: solid;
+    border-color: var(--red);
+    background: rgba(220, 38, 38, 0.08);
+  }
+
+  .photo-tune {
+    display: none;
+    margin-top: 14px;
+    padding: 14px;
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .photo-tune.show { display: block; }
+  .photo-tune .tune-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .photo-tune .tune-row:last-child { margin-bottom: 0; }
+  .photo-tune label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate-400);
+    min-width: 54px;
+    margin: 0;
+  }
+  .photo-tune input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    outline: none;
+  }
+  .photo-tune input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--red);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.5);
+  }
+  .photo-tune input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--red);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.5);
+  }
+
+  .primary-row { margin-top: 22px; }
+  .btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+    margin-bottom: 10px;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn:disabled { opacity: 0.6; cursor: wait; }
+  .btn svg { width: 18px; height: 18px; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--red), var(--red-deep));
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(220, 38, 38, 0.35);
+  }
+  .btn-primary:hover { box-shadow: 0 12px 30px rgba(220, 38, 38, 0.5); }
+  .btn-ghost {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+
+  .share-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--slate-400);
+    margin: 20px 0 10px;
+    text-align: center;
+  }
+  .share-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .share-btn {
+    aspect-ratio: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+  .share-btn:active { transform: scale(0.92); }
+  .share-btn:hover {
+    background: rgba(220, 38, 38, 0.15);
+    border-color: var(--red);
+  }
+  .share-btn svg { width: 20px; height: 20px; }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(120px);
+    background: var(--slate-800);
+    color: #fff;
+    border: 1px solid var(--red);
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 1000;
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    max-width: 90vw;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast svg { width: 18px; height: 18px; color: var(--red-glow); flex-shrink: 0; }
+
+  .foot {
+    text-align: center;
+    margin-top: 36px;
+    font-size: 12px;
+    color: var(--slate-400);
+    padding: 0 20px;
+    opacity: 0.7;
+  }
+  .foot a { color: inherit; text-decoration: underline; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <span class="dot"></span>
+    <span>DOCEM · PENIEL 2026</span>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="kicker">May 27 – 29, 2026</div>
+  <h1>I'm Coming to <span class="em">Peniel.</span></h1>
+  <p>Create your personal poster, share on your socials, and let the world know you'll be there.</p>
+</section>
+
+<main class="main">
+
+  <section class="controls">
+    <div class="controls-title">Personalize your poster</div>
+    <div class="controls-sub">Two quick steps. Takes under a minute.</div>
+
+    <div class="field">
+      <label>1. Your Name</label>
+      <input id="nameInput" type="text" placeholder="e.g. Daniel Okonkwo" maxlength="28" autocomplete="off" />
+    </div>
+
+    <div class="field">
+      <label>2. Upload Your Photo</label>
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="photoInput" accept="image/*" />
+        <div class="up-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+        </div>
+        <div class="up-main" id="uploadText">Tap to upload photo</div>
+        <div class="up-sub">A clear portrait works best</div>
+      </div>
+
+      <div class="photo-tune" id="photoTune">
+        <div class="tune-row">
+          <label>Zoom</label>
+          <input type="range" id="zoomSlider" min="100" max="200" value="110" />
+        </div>
+        <div class="tune-row">
+          <label>Position</label>
+          <input type="range" id="yposSlider" min="0" max="100" value="30" />
+        </div>
+      </div>
+    </div>
+
+    <div class="primary-row">
+      <button class="btn btn-primary" id="downloadBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download Poster
+      </button>
+      <button class="btn btn-ghost" id="copyBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+          <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+        </svg>
+        Copy Image
+      </button>
+    </div>
+
+    <div class="share-title">— Share Your Poster —</div>
+
+    <div class="share-grid">
+      <button class="share-btn" data-share="whatsapp" aria-label="Share on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.498 14.382c-.301-.15-1.767-.867-2.04-.966-.273-.101-.473-.15-.673.15-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.134-.135.301-.345.451-.523.146-.181.194-.301.297-.496.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.02-1.045 2.475s1.07 2.865 1.219 3.075c.149.195 2.105 3.195 5.1 4.485.714.3 1.27.48 1.704.629.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345m-5.446 7.443h-.016a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.298A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </button>
+      <button class="share-btn" data-share="x" aria-label="Share on X">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </button>
+      <button class="share-btn" data-share="facebook" aria-label="Share on Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </button>
+      <button class="share-btn" data-share="instagram" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <section class="poster-wrap">
+    <div class="poster-frame">
+      <div class="poster" id="poster">
+        <div class="accent-bar"></div>
+
+        <div class="p-brand">
+          <div class="logo-box">
+            <img id="logoImg" src="docem-logo.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+            <div class="fallback" style="display:none;">F</div>
+          </div>
+          <div class="label">DOCEM</div>
+        </div>
+
+        <div class="p-date">MAY 27 – 29</div>
+
+        <div class="photo-area" id="photoArea">
+          <div class="photo-placeholder" id="photoPlaceholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+            <div class="t">Your photo here</div>
+            <div class="s">Upload it from the controls</div>
+          </div>
+          <img id="userPhoto" class="user-photo" style="display:none;" alt=""/>
+        </div>
+
+        <div class="p-bottom">
+          <div class="p-iam">— I'm Coming —</div>
+          <div class="p-name" id="nameDisplay">Your Name</div>
+
+          <div class="p-program">PENIEL</div>
+
+          <div class="p-divider"></div>
+
+          <div class="p-details">
+            <div class="p-detail-block">
+              <div class="lbl">When</div>
+              <div class="val">May 27–29<br/>2026</div>
+            </div>
+            <div class="p-detail-block right">
+              <div class="lbl">Where</div>
+              <div class="val">Redemption<br/>Camp, Lagos</div>
+            </div>
+          </div>
+
+          <div class="p-hashtag">#PENIEL2026 · #DOCEM</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="poster-hint">Your preview updates as you type. Tap <strong style="color:#fff">Download</strong> when it looks right.</p>
+  </section>
+
+</main>
+
+<footer class="foot">
+  Built for the DOCEM family ·
+  <a href="https://docem-website.vercel.app/">docemfellowship.org</a>
+</footer>
+
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="20 6 9 17 4 12"/>
+  </svg>
+  <span id="toastText">Done</span>
+</div>
+
+<script>
+  const nameInput     = document.getElementById('nameInput');
+  const photoInput    = document.getElementById('photoInput');
+  const uploadZone    = document.getElementById('uploadZone');
+  const uploadText    = document.getElementById('uploadText');
+  const nameDisplay   = document.getElementById('nameDisplay');
+  const userPhoto     = document.getElementById('userPhoto');
+  const photoPlaceholder = document.getElementById('photoPlaceholder');
+  const poster        = document.getElementById('poster');
+  const downloadBtn   = document.getElementById('downloadBtn');
+  const copyBtn       = document.getElementById('copyBtn');
+  const toast         = document.getElementById('toast');
+  const toastText     = document.getElementById('toastText');
+  const shareBtns     = document.querySelectorAll('[data-share]');
+  const photoTune     = document.getElementById('photoTune');
+  const zoomSlider    = document.getElementById('zoomSlider');
+  const yposSlider    = document.getElementById('yposSlider');
+
+  nameInput.addEventListener('input', e => {
+    const v = e.target.value.trim();
+    nameDisplay.textContent = v || 'Your Name';
+  });
+
+  photoInput.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      userPhoto.src = ev.target.result;
+      userPhoto.style.display = 'block';
+      photoPlaceholder.style.display = 'none';
+      uploadZone.classList.add('has-file');
+      uploadText.textContent = '✓ ' + (file.name.length > 24 ? file.name.slice(0,22)+'…' : file.name);
+      photoTune.classList.add('show');
+    };
+    reader.readAsDataURL(file);
+  });
+
+  ['dragover','dragenter'].forEach(ev =>
+    uploadZone.addEventListener(ev, e => { e.preventDefault(); })
+  );
+  uploadZone.addEventListener('drop', e => {
+    e.preventDefault();
+    if (e.dataTransfer.files.length) {
+      photoInput.files = e.dataTransfer.files;
+      photoInput.dispatchEvent(new Event('change'));
+    }
+  });
+
+  function updatePhotoTransform() {
+    const zoom = zoomSlider.value;
+    const ypos = yposSlider.value;
+    userPhoto.style.transform = `scale(${zoom/100})`;
+    userPhoto.style.transformOrigin = `center ${ypos}%`;
+    userPhoto.style.objectPosition = `center ${ypos}%`;
+  }
+  zoomSlider.addEventListener('input', updatePhotoTransform);
+  yposSlider.addEventListener('input', updatePhotoTransform);
+
+  function showToast(msg) {
+    toastText.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2600);
+  }
+
+  async function renderPoster() {
+    if (userPhoto.style.display !== 'none' && !userPhoto.complete) {
+      await new Promise(r => userPhoto.onload = r);
+    }
+    const canvas = await html2canvas(poster, {
+      backgroundColor: '#0f172a',
+      scale: 2.5,
+      useCORS: true,
+      logging: false,
+      allowTaint: true
+    });
+    return canvas;
+  }
+
+  downloadBtn.addEventListener('click', async () => {
+    if (userPhoto.style.display === 'none') {
+      showToast('Please upload a photo first');
+      return;
+    }
+    const originalHTML = downloadBtn.innerHTML;
+    downloadBtn.innerHTML = 'Rendering…';
+    downloadBtn.disabled = true;
+    try {
+      const canvas = await renderPoster();
+      const nm = (nameInput.value.trim() || 'attendee').replace(/\s+/g,'-').toLowerCase();
+      const link = document.createElement('a');
+      link.download = `peniel-2026-${nm}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('Downloaded · ready to share');
+    } catch (err) {
+      console.error(err);
+      showToast('Something went wrong — try again');
+    }
+    downloadBtn.innerHTML = originalHTML;
+    downloadBtn.disabled = false;
+  });
+
+  copyBtn.addEventListener('click', async () => {
+    if (userPhoto.style.display === 'none') {
+      showToast('Please upload a photo first');
+      return;
+    }
+    const originalHTML = copyBtn.innerHTML;
+    copyBtn.innerHTML = 'Copying…';
+    copyBtn.disabled = true;
+    try {
+      const canvas = await renderPoster();
+      canvas.toBlob(async blob => {
+        try {
+          await navigator.clipboard.write([ new ClipboardItem({ 'image/png': blob }) ]);
+          showToast('Copied — paste it anywhere');
+        } catch {
+          showToast('Copy not supported — use Download');
+        }
+        copyBtn.innerHTML = originalHTML;
+        copyBtn.disabled = false;
+      });
+    } catch {
+      showToast('Something went wrong');
+      copyBtn.innerHTML = originalHTML;
+      copyBtn.disabled = false;
+    }
+  });
+
+  const shareText = `I'm coming to PENIEL 2026 🔥 May 27–29 at Redemption Camp, Lagos. A divine encounter awaits. #PENIEL2026 #DOCEM`;
+  const shareUrl  = encodeURIComponent(window.location.href);
+
+  shareBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const platform = btn.dataset.share;
+      const text = encodeURIComponent(shareText);
+      let url = '';
+      switch(platform) {
+        case 'whatsapp':
+          url = `https://wa.me/?text=${text}%20${shareUrl}`; break;
+        case 'x':
+          url = `https://twitter.com/intent/tweet?text=${text}&url=${shareUrl}`; break;
+        case 'facebook':
+          url = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}&quote=${text}`; break;
+        case 'instagram':
+          showToast('Download the poster, then upload on IG');
+          return;
+      }
+      window.open(url, '_blank', 'width=600,height=500');
+      showToast('Tip: download your poster first, then attach');
+    });
+  });
+</script>
+</body>
+</html>
