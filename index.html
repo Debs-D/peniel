@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<meta name="theme-color" content="#0a0612"/>
-<title>I'm Coming to PENIEL 7.0 · DOCEM</title>
+<meta name="theme-color" content="#0f172a"/>
+<title>I'm Coming to PENIEL 2026 · DOCEM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
   :root {
     --red:        #dc2626;
-    --red-deep:   #7f1d1d;
+    --red-deep:   #991b1b;
     --red-glow:   #ef4444;
     --amber:      #fbbf24;
-    --gold:       #f59e0b;
-    --ink:        #0a0612;
-    --ink-2:      #15101f;
+    --slate-900:  #0f172a;
+    --slate-800:  #1e293b;
+    --slate-700:  #334155;
     --slate-400:  #94a3b8;
     --slate-200:  #e2e8f0;
     --white:      #ffffff;
@@ -28,7 +28,7 @@
 
   body {
     font-family: 'Plus Jakarta Sans', -apple-system, system-ui, sans-serif;
-    background: var(--ink);
+    background: var(--slate-900);
     color: var(--white);
     min-height: 100vh;
     overflow-x: hidden;
@@ -40,8 +40,8 @@
     position: fixed;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(220, 38, 38, 0.2) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(251, 191, 36, 0.1) 0%, transparent 60%);
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(220, 38, 38, 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(251, 191, 36, 0.08) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
@@ -54,6 +54,7 @@
     align-items: center;
     justify-content: center;
   }
+
   .brand {
     display: flex;
     align-items: center;
@@ -91,7 +92,7 @@
     margin-bottom: 14px;
   }
   .intro h1 {
-    font-family: 'Bodoni Moda', serif;
+    font-family: 'Playfair Display', serif;
     font-weight: 900;
     font-size: clamp(40px, 10vw, 64px);
     line-height: 0.95;
@@ -100,7 +101,7 @@
   }
   .intro h1 .em {
     font-style: italic;
-    font-weight: 800;
+    font-weight: 700;
     background: linear-gradient(135deg, #ef4444, #fbbf24);
     -webkit-background-clip: text;
     background-clip: text;
@@ -148,72 +149,32 @@
     width: 100%;
     max-width: 420px;
     aspect-ratio: 4 / 5;
-    border-radius: 20px;
+    border-radius: 18px;
     overflow: hidden;
     position: relative;
     box-shadow:
-      0 40px 80px -20px rgba(0,0,0,0.8),
-      0 0 0 1px rgba(255,255,255,0.08),
-      0 0 80px -20px rgba(220, 38, 38, 0.4);
+      0 30px 60px -20px rgba(0,0,0,0.7),
+      0 0 0 1px rgba(255,255,255,0.06),
+      0 0 60px -20px rgba(220, 38, 38, 0.35);
     transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
   }
   @media (min-width: 900px) {
     .poster-frame:hover { transform: translateY(-4px) scale(1.01); }
   }
 
-  /* ==============================
-     THE POSTER ITSELF
-     ============================== */
   .poster {
     position: absolute;
     inset: 0;
-    background: var(--ink);
+    background: var(--slate-900);
     display: flex;
     flex-direction: column;
     overflow: hidden;
   }
 
-  /* BACKGROUND LAYERS (behind photo) */
-  .poster-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background:
-      radial-gradient(ellipse at 50% 10%, rgba(251, 191, 36, 0.25) 0%, transparent 40%),
-      radial-gradient(ellipse at 50% 90%, rgba(220, 38, 38, 0.35) 0%, transparent 55%),
-      linear-gradient(180deg, #1a0e2a 0%, #0a0612 45%, #1a0912 100%);
-  }
-
-  /* divine light rays SVG overlay */
-  .poster-rays {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    opacity: 0.35;
-    pointer-events: none;
-  }
-  .poster-rays svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  /* subtle grain */
-  .poster-grain {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    opacity: 0.4;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    mix-blend-mode: overlay;
-  }
-
-  /* photo area - takes top ~55% */
   .photo-area {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 58%;
-    z-index: 3;
+    position: relative;
+    flex: 1;
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
     overflow: hidden;
   }
   .photo-area img.user-photo {
@@ -222,32 +183,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 25%;
-    /* subtle cinematic tone */
-    filter: contrast(1.05) saturate(1.08);
-  }
-
-  /* blend photo into background */
-  .photo-area::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(180deg,
-        rgba(10, 6, 18, 0) 0%,
-        rgba(10, 6, 18, 0) 55%,
-        rgba(10, 6, 18, 0.5) 80%,
-        rgba(10, 6, 18, 1) 100%);
-    pointer-events: none;
-  }
-  .photo-area::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 50% 0%, rgba(251, 191, 36, 0.12) 0%, transparent 45%);
-    pointer-events: none;
-    z-index: 1;
+    object-position: center 30%;
   }
 
   .photo-placeholder {
@@ -261,7 +197,6 @@
     color: var(--slate-400);
     text-align: center;
     padding: 40px 20px;
-    z-index: 2;
   }
   .photo-placeholder svg {
     width: 64px; height: 64px;
@@ -277,25 +212,46 @@
     opacity: 0.7;
   }
 
-  /* top-left brand chip (over photo) */
+  .photo-area::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg,
+        rgba(15, 23, 42, 0.45) 0%,
+        rgba(15, 23, 42, 0) 25%,
+        rgba(15, 23, 42, 0) 45%,
+        rgba(15, 23, 42, 0.85) 88%,
+        rgba(15, 23, 42, 0.98) 100%);
+    pointer-events: none;
+  }
+
+  .accent-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--red-deep), var(--red), var(--amber), var(--red), var(--red-deep));
+    z-index: 3;
+  }
+
   .p-brand {
     position: absolute;
-    top: 20px;
+    top: 18px;
     left: 20px;
-    z-index: 10;
+    z-index: 4;
     display: flex;
     align-items: center;
     gap: 8px;
   }
   .p-brand .logo-box {
-    width: 36px;
-    height: 36px;
-    background: rgba(255,255,255,0.12);
-    border-radius: 10px;
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.15);
     backdrop-filter: blur(10px);
     overflow: hidden;
     position: relative;
@@ -306,9 +262,9 @@
     padding: 3px;
   }
   .p-brand .logo-box .fallback {
-    font-family: 'Bodoni Moda', serif;
+    font-family: 'Playfair Display', serif;
     font-weight: 900;
-    font-size: 20px;
+    font-size: 18px;
     color: var(--red-glow);
     font-style: italic;
     position: absolute;
@@ -321,178 +277,82 @@
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.3em;
-    color: rgba(255,255,255,0.95);
+    color: rgba(255,255,255,0.9);
     text-transform: uppercase;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-  }
-  .p-brand .label .sub {
-    font-size: 8px;
-    opacity: 0.7;
-    letter-spacing: 0.15em;
-    margin-top: 2px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
   }
 
-  /* edition mark top right */
-  .p-edition {
+  .p-date {
     position: absolute;
-    top: 20px;
+    top: 18px;
     right: 20px;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
-  }
-  .p-edition .small {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.25em;
-    color: rgba(251, 191, 36, 0.9);
+    z-index: 4;
+    background: rgba(220, 38, 38, 0.95);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
-  }
-  .p-edition .big {
-    font-family: 'Bodoni Moda', serif;
-    font-weight: 900;
-    font-style: italic;
-    font-size: 38px;
-    line-height: 0.9;
-    background: linear-gradient(135deg, #fbbf24, #dc2626);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.5));
-    letter-spacing: -0.02em;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
   }
 
-  /* ============ BOTTOM BLOCK ============ */
   .p-bottom {
     position: absolute;
     left: 0; right: 0; bottom: 0;
-    z-index: 10;
-    padding: 0 26px 24px;
+    z-index: 4;
+    padding: 20px 24px 22px;
   }
-
-  /* I'M COMING above name */
   .p-iam {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 8px;
-  }
-  .p-iam .line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.6), transparent);
-    max-width: 70px;
-  }
-  .p-iam .text {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.4em;
-    color: var(--amber);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    white-space: nowrap;
+    color: var(--amber);
+    margin-bottom: 6px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
   }
-
-  /* attendee name */
   .p-name {
-    font-family: 'Bodoni Moda', serif;
-    font-weight: 800;
-    font-size: clamp(26px, 6.5vw, 32px);
-    line-height: 1;
-    letter-spacing: -0.01em;
-    text-align: center;
-    color: #fff;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(24px, 6vw, 30px);
+    line-height: 1.1;
+    margin-bottom: 14px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
     word-break: break-word;
-    margin-bottom: 18px;
   }
-
-  /* ========= THE HERO: PENIEL 7.0 ========= */
-  .p-hero {
-    position: relative;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .p-hero .peniel {
-    font-family: 'Bodoni Moda', serif;
+  .p-program {
+    font-family: 'Playfair Display', serif;
     font-weight: 900;
-    font-size: clamp(64px, 17vw, 88px);
-    line-height: 0.82;
-    letter-spacing: -0.03em;
-    background: linear-gradient(180deg, #ffffff 0%, #ffffff 60%, #fbbf24 100%);
+    font-size: clamp(44px, 11vw, 56px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #dc2626 0%, #fbbf24 60%, #dc2626 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter:
-      drop-shadow(0 0 20px rgba(251, 191, 36, 0.3))
-      drop-shadow(0 4px 12px rgba(0,0,0,0.8));
-    position: relative;
-    display: inline-block;
+    margin-bottom: 14px;
+    filter: drop-shadow(0 2px 8px rgba(220, 38, 38, 0.3));
   }
-
-  /* red flame accent behind PENIEL */
-  .p-hero::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    height: 4px;
-    background: linear-gradient(90deg, transparent 0%, #dc2626 20%, #fbbf24 50%, #dc2626 80%, transparent 100%);
-    filter: blur(6px);
-    opacity: 0.7;
-    z-index: 0;
+  .p-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    margin-bottom: 12px;
   }
-
-  /* edition tag under PENIEL */
-  .p-hero .edition-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 4px;
-    padding: 5px 14px;
-    background: linear-gradient(135deg, #dc2626, #7f1d1d);
-    border-radius: 999px;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.25em;
-    color: #fff;
-    text-transform: uppercase;
-    box-shadow:
-      0 4px 12px rgba(220, 38, 38, 0.5),
-      inset 0 1px 0 rgba(255,255,255,0.2);
-  }
-  .p-hero .edition-tag .num {
-    color: var(--amber);
-    font-weight: 700;
-  }
-
-  /* details row */
   .p-details {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     gap: 12px;
-    padding-top: 14px;
-    border-top: 1px solid rgba(255,255,255,0.12);
   }
   .p-detail-block { flex: 1; }
   .p-detail-block .lbl {
-    font-family: 'DM Mono', monospace;
     font-size: 8px;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0.25em;
-    color: rgba(251, 191, 36, 0.7);
+    color: rgba(255,255,255,0.5);
     text-transform: uppercase;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
   .p-detail-block .val {
     font-size: 12px;
@@ -501,14 +361,11 @@
     line-height: 1.3;
   }
   .p-detail-block.right { text-align: right; }
-  .p-detail-block.center { text-align: center; }
-
   .p-hashtag {
-    margin-top: 14px;
+    margin-top: 12px;
     text-align: center;
-    font-family: 'DM Mono', monospace;
     font-size: 10px;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0.2em;
     color: rgba(251, 191, 36, 0.85);
     text-transform: uppercase;
@@ -522,10 +379,9 @@
     line-height: 1.5;
   }
 
-  /* ============ CONTROLS ============ */
   .controls {
     order: 2;
-    background: rgba(30, 18, 45, 0.4);
+    background: rgba(30, 41, 59, 0.4);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 18px;
     padding: 22px 20px;
@@ -558,7 +414,7 @@
   }
   .field input[type="text"] {
     width: 100%;
-    background: rgba(10, 6, 18, 0.6);
+    background: rgba(15, 23, 42, 0.6);
     border: 1.5px solid rgba(255,255,255,0.1);
     border-radius: 12px;
     padding: 14px 16px;
@@ -571,7 +427,7 @@
   .field input[type="text"]:focus {
     outline: none;
     border-color: var(--red);
-    background: rgba(10, 6, 18, 0.9);
+    background: rgba(15, 23, 42, 0.9);
   }
   .field input[type="text"]::placeholder { color: var(--slate-400); opacity: 0.7; }
 
@@ -583,7 +439,7 @@
     text-align: center;
     cursor: pointer;
     transition: all 0.25s ease;
-    background: rgba(10, 6, 18, 0.4);
+    background: rgba(15, 23, 42, 0.4);
   }
   .upload-zone:active { transform: scale(0.98); }
   .upload-zone:hover {
@@ -624,7 +480,7 @@
     display: none;
     margin-top: 14px;
     padding: 14px;
-    background: rgba(10, 6, 18, 0.5);
+    background: rgba(15, 23, 42, 0.5);
     border-radius: 12px;
     border: 1px solid rgba(255,255,255,0.06);
   }
@@ -642,7 +498,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--slate-400);
-    min-width: 56px;
+    min-width: 54px;
     margin: 0;
   }
   .photo-tune input[type="range"] {
@@ -746,7 +602,7 @@
     bottom: 24px;
     left: 50%;
     transform: translateX(-50%) translateY(120px);
-    background: var(--ink-2);
+    background: var(--slate-800);
     color: #fff;
     border: 1px solid var(--red);
     padding: 12px 20px;
@@ -786,12 +642,12 @@
 <header class="top">
   <div class="brand">
     <span class="dot"></span>
-    <span>DOCEM · PENIEL 7.0</span>
+    <span>DOCEM · PENIEL 2026</span>
   </div>
 </header>
 
 <section class="intro">
-  <div class="kicker">May 27 – 29, 2026 · 7<sup style="font-size:60%">TH</sup> Edition</div>
+  <div class="kicker">May 27 – 29, 2026</div>
   <h1>I'm Coming to <span class="em">Peniel.</span></h1>
   <p>Create your personal poster, share on your socials, and let the world know you'll be there.</p>
 </section>
@@ -804,7 +660,7 @@
 
     <div class="field">
       <label>1. Your Name</label>
-      <input id="nameInput" type="text" placeholder="e.g. Debby Okonkwo" maxlength="24" autocomplete="off" />
+      <input id="nameInput" type="text" placeholder="e.g. Daniel Okonkwo" maxlength="28" autocomplete="off" />
     </div>
 
     <div class="field">
@@ -829,7 +685,7 @@
         </div>
         <div class="tune-row">
           <label>Position</label>
-          <input type="range" id="yposSlider" min="0" max="100" value="25" />
+          <input type="range" id="yposSlider" min="0" max="100" value="30" />
         </div>
       </div>
     </div>
@@ -873,33 +729,18 @@
   <section class="poster-wrap">
     <div class="poster-frame">
       <div class="poster" id="poster">
+        <div class="accent-bar"></div>
 
-        <!-- BACKGROUND -->
-        <div class="poster-bg"></div>
-
-        <!-- DIVINE LIGHT RAYS -->
-        <div class="poster-rays">
-          <svg viewBox="0 0 420 525" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="ray" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.5"/>
-                <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <g style="transform-origin: 210px 0; opacity: 0.6;">
-              <polygon points="210,0 160,525 260,525" fill="url(#ray)" transform="rotate(-25 210 0)"/>
-              <polygon points="210,0 180,525 240,525" fill="url(#ray)" transform="rotate(-12 210 0)"/>
-              <polygon points="210,0 195,525 225,525" fill="url(#ray)"/>
-              <polygon points="210,0 180,525 240,525" fill="url(#ray)" transform="rotate(12 210 0)"/>
-              <polygon points="210,0 160,525 260,525" fill="url(#ray)" transform="rotate(25 210 0)"/>
-            </g>
-          </svg>
+        <div class="p-brand">
+          <div class="logo-box">
+            <img id="logoImg" src="docem-logo.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+            <div class="fallback" style="display:none;">F</div>
+          </div>
+          <div class="label">DOCEM</div>
         </div>
 
-        <!-- GRAIN -->
-        <div class="poster-grain"></div>
+        <div class="p-date">MAY 27 – 29</div>
 
-        <!-- PHOTO -->
         <div class="photo-area" id="photoArea">
           <div class="photo-placeholder" id="photoPlaceholder">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -913,43 +754,13 @@
           <img id="userPhoto" class="user-photo" style="display:none;" alt=""/>
         </div>
 
-        <!-- TOP CHIPS -->
-        <div class="p-brand">
-          <div class="logo-box">
-            <img id="logoImg" src="docem-logo.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
-            <div class="fallback" style="display:none;">F</div>
-          </div>
-          <div class="label">
-            DOCEM
-            <div class="sub">FELLOWSHIP</div>
-          </div>
-        </div>
-
-        <div class="p-edition">
-          <div class="small">EDITION</div>
-          <div class="big">7.0</div>
-        </div>
-
-        <!-- BOTTOM BLOCK -->
         <div class="p-bottom">
-
-          <div class="p-iam">
-            <span class="line"></span>
-            <span class="text">I'm Coming</span>
-            <span class="line"></span>
-          </div>
-
+          <div class="p-iam">— I'm Coming —</div>
           <div class="p-name" id="nameDisplay">Your Name</div>
 
-          <!-- HERO BLOCK -->
-          <div class="p-hero">
-            <div class="peniel">PENIEL</div>
-            <div>
-              <div class="edition-tag">
-                <span>The</span><span class="num">7</span><span>.0</span><span>Experience</span>
-              </div>
-            </div>
-          </div>
+          <div class="p-program">PENIEL</div>
+
+          <div class="p-divider"></div>
 
           <div class="p-details">
             <div class="p-detail-block">
@@ -964,7 +775,6 @@
 
           <div class="p-hashtag">#PENIEL2026 · #DOCEM</div>
         </div>
-
       </div>
     </div>
 
@@ -1055,7 +865,7 @@
       await new Promise(r => userPhoto.onload = r);
     }
     const canvas = await html2canvas(poster, {
-      backgroundColor: '#0a0612',
+      backgroundColor: '#0f172a',
       scale: 2.5,
       useCORS: true,
       logging: false,
@@ -1076,7 +886,7 @@
       const canvas = await renderPoster();
       const nm = (nameInput.value.trim() || 'attendee').replace(/\s+/g,'-').toLowerCase();
       const link = document.createElement('a');
-      link.download = `peniel-7-${nm}.png`;
+      link.download = `peniel-2026-${nm}.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
       showToast('Downloaded · ready to share');
@@ -1115,7 +925,7 @@
     }
   });
 
-  const shareText = `I'm coming to PENIEL 7.0 🔥 May 27–29 at Redemption Camp, Lagos. Seven years of divine encounters. #PENIEL2026 #PENIEL7 #DOCEM`;
+  const shareText = `I'm coming to PENIEL 2026 🔥 May 27–29 at Redemption Camp, Lagos. A divine encounter awaits. #PENIEL2026 #DOCEM`;
   const shareUrl  = encodeURIComponent(window.location.href);
 
   shareBtns.forEach(btn => {
