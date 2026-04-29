@@ -12,17 +12,15 @@
 <meta property="og:type"        content="website" />
 <meta property="og:title"       content="I'm Going to Peniel 8.0 🔥" />
 <meta property="og:description" content="Make your own poster and let everyone know you'll be at Peniel 8.0 — May 27–29, 2026. Tap to create yours!" />
-<meta property="og:image"       content="https://docem-website.vercel.app/peniel-preview.png" />
-<meta property="og:image:width"  content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:url"         content="https://docem-website.vercel.app/peniel" />
+<meta property="og:image"       content="https://peniel-eight.vercel.app/docem-logo.png" />
+<meta property="og:url"         content="https://peniel-eight.vercel.app/" />
 <meta property="og:site_name"   content="DOCEM Fellowship" />
 
 <!-- Twitter / X Card -->
 <meta name="twitter:card"        content="summary_large_image" />
 <meta name="twitter:title"       content="I'm Going to Peniel 8.0 🔥" />
 <meta name="twitter:description" content="Make your own poster and show your people you're going. Tap to create yours!" />
-<meta name="twitter:image"       content="https://docem-website.vercel.app/peniel-preview.png" />
+<meta name="twitter:image"       content="https://peniel-eight.vercel.app/docem-logo.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -686,8 +684,9 @@
         </div>
 
         <div class="p-footer">
-          <div class="p-coming">— I'm Coming —</div>
           <div class="p-name" id="nameDisplay">Your Name</div>
+
+          <div class="p-coming">— will be attending —</div>
 
           <div class="p-event">PENIEL 8.0</div>
 
@@ -861,27 +860,98 @@
     }
   });
 
-  // Share buttons
-  const pageUrl  = encodeURIComponent(window.location.href);
-  const shareMsg = encodeURIComponent(
-    "I'm going to Peniel 8.0! 🔥 May 27–29, 2026 · Redemption Camp, Lagos.\nMake your own poster here 👇"
-  );
+  // Share buttons — renders poster image then shares it directly
+  const siteUrl = 'https://peniel-eight.vercel.app';
+  const caption = `I'm going to Peniel 8.0! 🔥 May 27–29, 2026 · Redemption Camp, Lagos.\nMake your own poster here 👇 ${siteUrl}`;
+
+  async function getPosterFile() {
+    const canvas = await render();
+    return new Promise(resolve => {
+      canvas.toBlob(blob => {
+        const nm = (nameInput.value.trim() || 'attendee').replace(/\s+/g, '-').toLowerCase();
+        resolve(new File([blob], `peniel8-${nm}.png`, { type: 'image/png' }));
+      });
+    });
+  }
+
+  // Try native share (image appears directly in WhatsApp/Instagram on mobile)
+  async function nativeShare(file, text) {
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({ files: [file], text });
+        return true;
+      } catch (e) {
+        if (e.name === 'AbortError') return true; // user cancelled — that's fine
+      }
+    }
+    return false;
+  }
+
+  // Fallback: download image then open the platform
+  function downloadFile(file) {
+    const url = URL.createObjectURL(file);
+    const a = document.createElement('a');
+    a.href = url; a.download = file.name; a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
 
   document.querySelectorAll('[data-share]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const p = btn.dataset.share;
-      let url = '';
-      if (p === 'whatsapp') {
-        url = `https://wa.me/?text=${shareMsg}%20${pageUrl}`;
-      } else if (p === 'x') {
-        url = `https://twitter.com/intent/tweet?text=${shareMsg}&url=${pageUrl}`;
-      } else if (p === 'facebook') {
-        url = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}&quote=${shareMsg}`;
-      } else if (p === 'instagram') {
-        toast_('Save your poster first, then upload it on Instagram.');
+    btn.addEventListener('click', async () => {
+      if (userPhoto.style.display === 'none') {
+        toast_('Add your photo first, then share!');
         return;
       }
-      window.open(url, '_blank', 'width=600,height=500');
+
+      const platform = btn.dataset.share;
+      const origHTML = btn.innerHTML;
+      btn.textContent = '…';
+      btn.disabled = true;
+
+      try {
+        const file = await getPosterFile();
+
+        if (platform === 'whatsapp') {
+          // On mobile: share image directly into WhatsApp (image appears in chat)
+          const shared = await nativeShare(file, caption);
+          if (!shared) {
+            // Desktop fallback: download image + open WhatsApp with text
+            downloadFile(file);
+            setTimeout(() => {
+              window.open(`https://wa.me/?text=${encodeURIComponent(caption)}`, '_blank');
+            }, 800);
+            toast_('Poster saved — attach it in WhatsApp!');
+          }
+
+        } else if (platform === 'instagram') {
+          // Instagram: must share image from camera roll — download it
+          const shared = await nativeShare(file, caption);
+          if (!shared) {
+            downloadFile(file);
+            toast_('Poster saved — upload it to your Instagram story or post!');
+          }
+
+        } else if (platform === 'x') {
+          // Twitter can't receive files via URL, download + open
+          downloadFile(file);
+          setTimeout(() => {
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}`, '_blank', 'width=600,height=500');
+          }, 800);
+          toast_('Poster saved — attach it in the tweet!');
+
+        } else if (platform === 'facebook') {
+          downloadFile(file);
+          setTimeout(() => {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(siteUrl)}`, '_blank', 'width=600,height=500');
+          }, 800);
+          toast_('Poster saved — attach it to your Facebook post!');
+        }
+
+      } catch {
+        toast_('Something went wrong — try Save My Poster instead.');
+      }
+
+      btn.innerHTML = origHTML;
+      btn.disabled = false;
     });
   });
 </script>
